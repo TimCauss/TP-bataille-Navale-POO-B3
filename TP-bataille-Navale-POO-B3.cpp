@@ -19,6 +19,42 @@ const char MISSCHAR = '+';
 const char HITCHAR = 'X';
 
 
+// Créer class Board(taille)
+// une méthode de placement des ships
+// une méthode de gestion des tir (modification de la grille)
+
+class Board {
+
+private:
+    int size = BOARDSIZE;
+    vector<vector<char>> grid;
+
+public:
+
+    //Constructeur:
+    Board() : grid(size, vector<char>(size, SEACHAR)) {}
+
+    void print() const {
+
+        // numéro des colonnes
+        cout << "   "; // Le décallage des numéro de colonnes
+        for (int col = 0; col < BOARDSIZE; ++col) {
+            cout << setw(BOARDSETW) << col + 1;
+        }
+        cout << endl;
+
+        // Grille
+        for (int row = 0; row < BOARDSIZE; ++row) {         // On initiase la boucle avec row comme indice de ligne.
+            cout << setw(BOARDSETW) << row + 1 << " "; // Numéro de ligne.
+            for (const char& cell : grid[row]) {            // On itére ensuite sur chaque ref de cellule dans la ligne correspondante.    
+                cout << setw(BOARDSETW) << cell;       // On retourne le contenu de la cellule (cell).
+            }
+            cout << endl;
+        }
+    }
+};
+
+
 
 // Créer class Joueur
 // Les joueurs peuvent avec des ships et une board
@@ -42,8 +78,16 @@ public:
         return name;
     }
 
-    Board& getBoard() {
+    const Board& getBoard() {
         return board;
+    }
+
+    void printBoard() {
+        board.print();
+    }
+
+    const int& getID() {
+        return id;
     }
 
     // Faire getteur de la flotte ici
@@ -53,40 +97,6 @@ public:
 };
 
 
-// Créer class Board(taille)
-// une méthode de placement des ships
-// une méthode de gestion des tir (modification de la grille)
-class Board {
-
-private:
-    int size = BOARDSIZE;
-    vector<vector<char>> grid;
-
-public:
-
-    //Constructeur:
-    Board() : grid(size, vector<char>(size, SEACHAR)) {}
-    
-    void print() const {
-
-        // numéro des colonnes
-        cout << "   "; // Le décallage des numéro de colonnes
-        for (int col = 0; col < BOARDSIZE; ++col) {
-            cout << setw(BOARDSETW) << col + 1;
-        }
-        cout << endl;
-
-        // Grille
-        for (int row = 0; row < BOARDSIZE; ++row) {         // On initiase la boucle avec row comme indice de ligne.
-            cout << setw(BOARDSETW) << row + 1 << " "; // Numéro de ligne.
-            for (const char& cell : grid[row]) {            // On itére ensuite sur chaque ref de cellule dans la ligne correspondante.    
-                cout << setw(BOARDSETW) << cell;       // On retourne le contenu de la cellule (cell).
-            }
-            cout << endl;
-        }
-    }
-};
-
 
 // Créer class Ships(taille, direction, hp)
 
@@ -94,13 +104,19 @@ public:
 // Créer une class Game pour gérer la partie
 
 
-
+//Initialisation du compteur :
+int Players::nextId = 1;
 
 int main()
 {
-    Board playerBoard;
+    Players player1("Chrisophe");
+    Players player2("Louis");
 
-    playerBoard.print();
+    cout << "Player 1 ID : " << player1.getID() << ", Name: " << player1.getName() << endl;
+    player1.printBoard();
+
+    cout << "Player 2 ID : " << player2.getID() << ", Name: " << player2.getName() << endl;
+    player2.printBoard();
 
     return 0;
 }
