@@ -18,7 +18,7 @@ Pour ce jeu j'ai choisi de créer 3 objets distincts :
 
 Je commence par créer la classe Board pour tester son affichage, afin d'avoir une bonne base pour le plateau du jeu.
 
-J'ai créé un constructeur qui utilise un vector de char dans un vector afin d'avoir un vector en 2D. Il est initialisé avec la constante BOARDSIZE pour définir sa taille et rempli de la constante de type char, SEACHAR.
+J'ai créé un constructeur qui utilise un tableau en 2D. Il est initialisé avec la constante BOARDSIZE pour définir sa taille et rempli de la constante de type char, SEACHAR.
 
 Pour des raisons de lisibilité et de facilité du gameplay, j'ai ajouté les numéros des colonnes et des lignes, en utilisant une simple boucle for qui s'incrémente pour les colonnes.
 
@@ -48,5 +48,42 @@ Je change le main pour tester la nouvelle classe :
 ![image](https://github.com/TimCauss/TP-bataille-Navale-POO-B3/assets/96956172/5b0ba757-56e8-47de-a558-76fa8cc4688b)
 Ca fonctionne correctement.
 j'ai eu quelque soucis pour l'ID j'ai du apprendre sur internet pour sortir un compteur int static qui était déclaré en global
+
+3 - Creation de la class Ship :
+Comme d'habitude, on commence par les attributs j'ai choisis ici de stocker la taille, la coordonnée x, la coordonnée y, les hits et l'orientation.
+L'orientation sera un char qui représente H pour horizontal ou V pour vertical.
+Je fais un constructeur qui set toutes les varleur à l'appel d'une instance sauf hits qui sera défini à 0 lors de l'appel.
+
+Je m'attaque aux getters, un pour chaque attributs.
+Ensuite une méthode isSunk qui renvoie un bool si les hits sont égaux ou supérieur à la taille.
+Et finalement une méthode qui incrémente le hits à son appel.
+
+4 - Ajout de méthodes dans la class Board :
+
+Pour placer les bateaux j'ai besoin d'une méthode dédié à cela dans la class board, mais je dois d'abord vérifier si le bateau peut être placé.
+J'ai donc fait une méthode de vérification qui retourne un bool en comparant :
+
+  Si l'orientation est horizontal : la coordonée y + la taille à la BOARDSIZE. (false)
+    Puis on itére sur toute la taille pour chercher dans les coordonnées y si on trouve un SHIPCHAR (qui représente la lettre d'une partie de bateau sur le plateau). (false)
+
+  Si l'orientation est vertical : la coordonnée x + la taille à la BOARDSIZE. (false)
+    Puis on itére sur toute la taille pour chercher dans les coordonnées x si on trouve un SHIPCHAR. (false)
+Si tous les tests passent, on retour true et on peu donc placer le bateau.
+On appelera ensuite cette méthode pour vérifier l'emplacement des bateau.
+
+Je m'attaque ensuite à la méthode de placement des bateaux, 
+Je récupère les attributs de la ref de l'objet Ship
+Je vais utiliser la même technique que la vérification dans les boucles sans qu'on va set les char à la place de les comparer. 
+Pour une vérification, elle retourne false si elle ne peu pas placer le bateau et true apres le placement (je ne sais pas encore comment je vais l'utiliser).
+
+
+
+
+
+
+
+
+
+
 
 
