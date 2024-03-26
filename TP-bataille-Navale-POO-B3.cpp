@@ -27,15 +27,18 @@ class Players {
 private:
     string name;
     int id;
-    vector<vector<char>> playerGrid;
+    Board board;
+    // vector de ships à faire apres
 
+public:
+    Players(const string& n) : name(n), board(Board()){
+        // Création de ship à faire plus tard
+    }
 
 };
 
 
 // Créer class Board(taille)
-// Devra contenir la taille, le plateau lui-même, 
-// une méthode de représentation du board
 // une méthode de placement des ships
 // une méthode de gestion des tir (modification de la grille)
 class Board {
