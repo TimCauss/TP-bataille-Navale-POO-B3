@@ -27,6 +27,8 @@ class Players {
 private:
     string name;
     int id;
+    vector<vector<char>> playerGrid;
+
 
 };
 
@@ -52,17 +54,17 @@ public:
         // numéro des colonnes
         cout << "   "; // Le décallage des numéro de colonnes
         for (int col = 0; col < BOARDSIZE; ++col) {
-            cout << std::setw(BOARDSETW) << col + 1;
+            cout << setw(BOARDSETW) << col + 1;
         }
-        cout << std::endl;
+        cout << endl;
 
         // Grille
         for (int row = 0; row < BOARDSIZE; ++row) {         // On initiase la boucle avec row comme indice de ligne.
-            cout << std::setw(BOARDSETW) << row + 1 << " "; // Numéro de ligne.
+            cout << setw(BOARDSETW) << row + 1 << " "; // Numéro de ligne.
             for (const char& cell : grid[row]) {            // On itére ensuite sur chaque ref de cellule dans la ligne correspondante.    
-                cout << std::setw(BOARDSETW) << cell;       // On retourne le contenu de la cellule (cell).
+                cout << setw(BOARDSETW) << cell;       // On retourne le contenu de la cellule (cell).
             }
-            cout << std::endl;
+            cout << endl;
         }
     }
 };
