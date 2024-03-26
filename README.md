@@ -31,3 +31,22 @@ On itère ensuite dans une boucle interne pour afficher chaque "cellule"
 Un appel à l'objet puis un print de l'objet permet d'afficher la grille :
 ![image](https://github.com/TimCauss/TP-bataille-Navale-POO-B3/assets/96956172/86eb58b3-5b88-49b4-b9f2-34ef92f35e29)
 
+
+Après cette étape j'ai décidé de m'attaquer à la construction de la classe player.
+
+2 - Création de la classe Player:
+
+J'ai décidé que le joueur aura un nom, un id, sa grille et son vector de shipset décidé des attribus en conséqence puis fait un constructeur.
+La liste d'initialisation du constructeur set directement le nom, et la board du joeur.
+Dans les instruction du constructeur j'ajoute la valeur du compteur static (nextId) à l'id du joueur puis je l'incrémente pour le prochains joueur.
+Je laisse un commentaire pour créer l'initialisation du vecteur de ships.
+
+J'ai ensuite fait des getters pour récupérer le nom, le board l'id.
+Et une méthode pour print le board du joueur via l'appel de son instance.
+
+Je change le main pour tester la nouvelle classe :
+![image](https://github.com/TimCauss/TP-bataille-Navale-POO-B3/assets/96956172/1e902e67-0479-452d-bfbe-ec8293a6f370)
+Ca fonctionne correctement.
+j'ai eu quelque soucis pour l'ID j'ai du apprendre sur internet pour sortir un compteur int static qui était déclaré en global
+
+
