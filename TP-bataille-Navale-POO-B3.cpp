@@ -35,6 +35,19 @@ public:
         // Création de ship à faire plus tard
     }
 
+    //getters :
+    const string& getName() {
+        return name;
+    }
+
+    Board& getBoard() {
+        return board;
+    }
+
+    // Faire getteur de la flotte ici
+
+
+
 };
 
 
