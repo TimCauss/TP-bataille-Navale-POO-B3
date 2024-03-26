@@ -49,7 +49,7 @@ public:
     
     void print() const {
 
-        std::cout << "   ";
+        std::cout << "   "; // Le décallage des numéro de colonnes
         for (int col = 0; col < BOARDSIZE; ++col) {
             std::cout << std::setw(2) << col + 1;
         }
