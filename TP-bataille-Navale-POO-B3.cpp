@@ -50,25 +50,28 @@ public:
     void print() const {
 
         // numéro des colonnes
-        std::cout << "   "; // Le décallage des numéro de colonnes
+        cout << "   "; // Le décallage des numéro de colonnes
         for (int col = 0; col < BOARDSIZE; ++col) {
-            std::cout << std::setw(BOARDSETW) << col + 1;
+            cout << std::setw(BOARDSETW) << col + 1;
         }
-        std::cout << std::endl;
+        cout << std::endl;
 
         // Grille
-        for (int row = 0; row < BOARDSIZE; ++row) {
-            std::cout << std::setw(BOARDSETW) << row + 1 << " ";
-            for (const char& cell : grid[row]) {
-                std::cout << std::setw(BOARDSETW) << cell;
+        for (int row = 0; row < BOARDSIZE; ++row) {         // On initiase la boucle avec row comme indice de ligne.
+            cout << std::setw(BOARDSETW) << row + 1 << " "; // Numéro de ligne.
+            for (const char& cell : grid[row]) {            // On itére ensuite sur chaque ref de cellule dans la ligne correspondante.    
+                cout << std::setw(BOARDSETW) << cell;       // On retourne le contenu de la cellule (cell).
             }
-            std::cout << std::endl;
+            cout << std::endl;
         }
     }
 };
 
 
 // Créer class Ships(taille, direction, hp)
+
+
+// Créer une class Game pour gérer la partie
 
 
 
