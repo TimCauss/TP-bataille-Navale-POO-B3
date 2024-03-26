@@ -45,7 +45,7 @@ J'ai ensuite fait des getters pour récupérer le nom, le board l'id.
 Et une méthode pour print le board du joueur via l'appel de son instance.
 
 Je change le main pour tester la nouvelle classe :
-![image](https://github.com/TimCauss/TP-bataille-Navale-POO-B3/assets/96956172/1e902e67-0479-452d-bfbe-ec8293a6f370)
+![image](https://github.com/TimCauss/TP-bataille-Navale-POO-B3/assets/96956172/5b0ba757-56e8-47de-a558-76fa8cc4688b)
 Ca fonctionne correctement.
 j'ai eu quelque soucis pour l'ID j'ai du apprendre sur internet pour sortir un compteur int static qui était déclaré en global
 
