@@ -4,7 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <vector>
+#include <array>
 using namespace::std;
 
 // Variables constantes du jeu
@@ -19,9 +19,17 @@ const char MISSCHAR = '+';
 const char HITCHAR = 'X';
 
 
-// Créer class Board(taille)
-// une méthode de placement des ships
-// une méthode de gestion des tir (modification de la grille)
+//Games :
+class Game {
+private:
+    array<Player, PLAYERSNBR> players; // pense bete std::array<int, 3> a = {1, 2, 3};
+
+    // Reprendre ICI demain
+    // On commence par harcoder les bateaux
+    // TODO: coder une méthode aléatoire
+
+};
+
 
 // SHIP
 class Ship {
