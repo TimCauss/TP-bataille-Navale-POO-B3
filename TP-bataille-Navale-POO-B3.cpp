@@ -39,6 +39,15 @@ public:
         // A faire apres la verif
     }
 
+
+    //Method de verif de placement
+    bool canPlaceShip(int x, int y, int size, char orientation) {
+        if (orientation == 'H') {
+            if (y + size > BOARDSIZE) return false;
+
+        }
+    }
+
     void print() const {
 
         // numéro des colonnes
@@ -47,15 +56,6 @@ public:
             cout << setw(BOARDSETW) << col + 1;
         }
         cout << endl;
-
-
-        //Method de verif de placement
-        bool canPlaceShip(int x, int y, int size, char orientation) {
-            if (orientation == 'H') {
-                if (y + size > BOARDSIZE) return false; 
-            }
-        }
-
 
         // Grille
         for (int row = 0; row < BOARDSIZE; ++row) {         // On initiase la boucle avec row comme indice de ligne.
@@ -66,12 +66,13 @@ public:
             cout << endl;
         }
     }
+
+
 };
 
 
 
 // Créer class Joueur
-// Les joueurs peuvent avec des ships et une board
 
 class Players {
 private:
