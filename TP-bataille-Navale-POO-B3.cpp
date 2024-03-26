@@ -34,6 +34,11 @@ public:
     //Constructeur:
     Board() : grid(size, vector<char>(size, SEACHAR)) {}
 
+
+    bool placeShip(Ship& ship) {
+        // A faire apres la verif
+    }
+
     void print() const {
 
         // numéro des colonnes
@@ -42,6 +47,15 @@ public:
             cout << setw(BOARDSETW) << col + 1;
         }
         cout << endl;
+
+
+        //Method de verif de placement
+        bool canPlaceShip(int x, int y, int size, char orientation) {
+            if (orientation == 'H') {
+                if (y + size > BOARDSIZE) return false; 
+            }
+        }
+
 
         // Grille
         for (int row = 0; row < BOARDSIZE; ++row) {         // On initiase la boucle avec row comme indice de ligne.
@@ -98,17 +112,53 @@ public:
 
 
 
-// Créer class Ships(taille, direction, hp)
+// SHIP
+class Ship {
+private:
+    int size, x, y, hits;
+    char orientation;
 
+public:
+    Ship(int(s), int(x), int(y), char(o)) : size(s), x(x), y(y), orientation(o), hits(0) {}
+
+    // Getters:
+    int getSize() {
+        return size;
+    }
+
+    int getX() {
+        return x;
+    }
+
+    int getY() {
+        return y;
+    }
+
+    int getOrientation() {
+        return orientation;
+    }
+
+    // Methdes
+    bool isSunk() {
+        return hits >= size;
+    }
+
+    void hits() {
+        hits++;
+    }
+
+};
 
 // Créer une class Game pour gérer la partie
 
 
-//Initialisation du compteur :
+//Initialisation du compteur d'ID :
 int Players::nextId = 1;
+
 
 int main()
 {
+
     Players player1("Chrisophe");
     Players player2("Louis");
 
