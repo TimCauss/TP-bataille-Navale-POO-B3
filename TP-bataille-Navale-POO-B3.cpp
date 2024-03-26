@@ -49,16 +49,18 @@ public:
     
     void print() const {
 
+        // numéro des colonnes
         std::cout << "   "; // Le décallage des numéro de colonnes
         for (int col = 0; col < BOARDSIZE; ++col) {
-            std::cout << std::setw(2) << col + 1;
+            std::cout << std::setw(BOARDSETW) << col + 1;
         }
         std::cout << std::endl;
 
+        // Grille
         for (int row = 0; row < BOARDSIZE; ++row) {
-            std::cout << std::setw(2) << row + 1 << " ";
+            std::cout << std::setw(BOARDSETW) << row + 1 << " ";
             for (const char& cell : grid[row]) {
-                std::cout << std::setw(2) << cell;
+                std::cout << std::setw(BOARDSETW) << cell;
             }
             std::cout << std::endl;
         }
