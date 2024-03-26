@@ -26,12 +26,14 @@ const char HITCHAR = 'X';
 class Players {
 private:
     string name;
+    static int nextId;
     int id;
     Board board;
     // vector de ships à faire apres
 
 public:
     Players(const string& n) : name(n), board(Board()){
+        id = nextId++;
         // Création de ship à faire plus tard
     }
 
