@@ -94,7 +94,14 @@ Maintenant que nous avons nos ship je vai pouvoir commencer la boucle de gamepla
 Pour gérer le jeu et les objets j'ai décidé de créer une class Game.
 Elle aura pour attributs les noms des joueurs, et un tableau des joueurs.
 
+elle comprendra la construction des joueurs, et la gestion de la boucle de gameplay et de la condition de victoire.
 
+en parrallèle : 
+- j'ai ajouté une méthode vérification des tir dans la class Board.
+- Un appel à cette méthode dans la class joueur.
+
+La classe game contient une méthode GameOver qui va vérifier la grid ennemy pour savoir s'il reste des bateaux.
+Je voulais faire une gestion complète de la flote via les instance des ships mais je n'ai pas le temps.
 
 
 
