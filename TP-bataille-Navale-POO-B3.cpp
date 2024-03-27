@@ -1,5 +1,4 @@
 // TP-bataille-Navale-POO-B3.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
 
 #include <iostream>
 #include <iomanip>
@@ -7,9 +6,6 @@
 #include <array>
 #include <vector>
 #include <Windows.h>
-
-
-
 using namespace::std;
 
 // Variables constantes du jeu
@@ -231,6 +227,7 @@ private:
     // Append les ship à la flotte du joueur !! doc vector pour trouver un append => emplace_back
     void initializeFleet() { // TODO A mettre dans une boucle qui tourne SHIPNBR fois
         fleet.emplace_back(2, 0, 0, 'H');
+        fleet.emplace_back(3, 0, 0, 'V');
     }
 
     void placeFleet() { // TODO: Faire une boucle de placement
