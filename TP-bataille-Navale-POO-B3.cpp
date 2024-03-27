@@ -6,6 +6,8 @@
 #include <string>
 #include <array>
 #include <vector>
+#include <Windows.h>
+
 
 
 using namespace::std;
@@ -20,29 +22,6 @@ const char SHIPSCHAR = 'X';
 const char SEACHAR = '0';
 const char MISSCHAR = '+';
 const char HITCHAR = 'H';
-
-
-
-//Games :                   // pense bete std::array<int, 3> a = {1, 2, 3};
-class Game {
-private:
-    string playerName1;
-    string playerName2;
-
-
-    // A TERMINER
-    /*
-    Game() {
-        players[0] = Player(playerName1);
-        players[1] = Player(playerName2);
-    }
-    */
-
-    void run(){
-        //A faire, méthode pour une boucle de gameplay
-    }
-
-};
 
 
 // SHIP
@@ -79,7 +58,7 @@ public:
         this->orientation = orientation;
     }
 
-    // Methdes
+    // Methodes
 
     bool isSunk() {
         return hits >= size;
@@ -147,6 +126,41 @@ public:
        return true;
     }
 
+    // Méthode pour gérer les tirs
+    // TODO : Vérifier si le bateau est coulé
+    bool attack(int x, int y) {
+        x--;
+        y--;
+        // On verif si les coord sont sur la map:
+        if (x < 0 || x >= BOARDSIZE || y < 0 || y >= BOARDSIZE) {
+            cout << "Frerot t'es en dehors de la map ! " << endl;
+            return false;
+        }
+
+        // On vérif s'il y a un bateau :
+        if (grid[x][y] == SHIPSCHAR) {
+            grid[x][y] = HITCHAR;
+            // TODO verif bateau coulé
+            return true;
+        }
+        else {
+            grid[x][y] = MISSCHAR;
+            return false;
+        }
+    }
+
+    bool areAllShipsSunk() const {
+        for (int i = 0; i < BOARDSIZE; ++i) {
+            for (int j = 0; j < BOARDSIZE; ++j) {
+                if (grid[i][j] == SHIPSCHAR) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
     void print() const {
 
         // numéro des colonnes
@@ -201,12 +215,21 @@ public:
         return id;
     }
 
+    // appel de la méthode attaque de la class board pour vérifier le tir de la board du joueur
+    bool attack(int x, int y) {
+        return board.attack(x, y);
+    }
+
+
+    bool hasLost() {
+        return board.areAllShipsSunk();
+    }
+
+
 private:
 
     // Append les ship à la flotte du joueur !! doc vector pour trouver un append => emplace_back
-    void initializeFleet() { // A mettre dans une boucle qui tourne SHIPNBR fois
-        fleet.emplace_back(4, 0, 0, 'H');
-        fleet.emplace_back(3, 0, 0, 'H');
+    void initializeFleet() { // TODO A mettre dans une boucle qui tourne SHIPNBR fois
         fleet.emplace_back(2, 0, 0, 'H');
     }
 
@@ -236,6 +259,75 @@ private:
             }
         }
     }
+};
+
+//Games :              
+class Game {
+private:
+    string playerName1;
+    string playerName2;
+    vector<Player> players;
+    int currentPlayerIndex = 0;
+
+
+public:
+
+    Game() {
+        string name1, name2;
+        cout << "Entrer le nom du joueur 1: ";
+        cin >> playerName1;
+        cout << "\nEntrer le nom du joueur 2: ";
+        cin >> playerName2;
+
+        players.emplace_back(playerName1);
+        players.emplace_back(playerName2);
+
+    }
+
+    //Boucle de gameplay
+    void run() {
+        cout << "Début du jeu !" << endl;
+        while (!GameOver()) {
+            Player& currentPlayer = players[currentPlayerIndex];
+            Player& enemyPlayer = players[(currentPlayerIndex + 1) % PLAYERSNBR];
+            enemyPlayer.printBoard();
+            cout << u8"Au tour de " << players[currentPlayerIndex].getName() << " !" << endl;
+            int x, y;
+            cout << u8"Entrer les coordonnées du tir (numéro de ligne): ";
+            cin >> x;
+            cout << u8"\nEntrer les coordonnées du tir (numéro de colonne): ";
+            cin >> y;
+            cout << endl;
+
+            bool hit = enemyPlayer.attack(x, y);
+            if (hit) {
+                cout << "Dans le mille !" << endl;
+            }
+            else {
+                cout << u8"Raté !" << endl;
+            }
+
+            // Vérifier si le joueur a gagné après l'attaque
+            if (enemyPlayer.hasLost()) { 
+                cout << currentPlayer.getName() << u8" a gagné ! YOUHOUUUUU !" << endl << endl;
+                break; // 
+            }
+
+            currentPlayerIndex = (currentPlayerIndex + 1) % PLAYERSNBR;
+        }
+    }
+
+private:
+    // Condition de fin
+    
+    bool GameOver() {
+        for (Player& player : players) {
+            if (player.hasLost()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 };
 
@@ -246,18 +338,12 @@ int Player::nextId = 1;
 
 int main()
 {
+    SetConsoleOutputCP(CP_UTF8);
     srand(time(0)); // On génére la seed du random
+    
+    Game game;
+    game.run();
 
-    Player player1("Chrisophe");
-    Player player2("Louis");
-
-
-    cout << "Player 1 ID : " << player1.getID() << ", Name: " << player1.getName() << endl;
-    player1.printBoard();
-
-    cout << endl << endl;
-    cout << "Player 2 ID : " << player2.getID() << ", Name: " << player2.getName() << endl;
-    player2.printBoard();
 
     return 0;
 }
