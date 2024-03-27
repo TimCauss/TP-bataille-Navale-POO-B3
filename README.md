@@ -9,10 +9,11 @@ Pour ce jeu j'ai choisi de créer 3 objets distincts :
 1. Boards
 - Responsabilité : Gérer la grille de jeu pour chaque joueur, y compris la visualisation de la grille, l'emplacement des navires et le suivi des tirs.
 2. Players
-- Responsabilité : Représenter chaque joueur, contenant leurs informations (nom, score...), leur plateau de jeu (Board) et leurs navires (Ships).
+- Responsabilité : Représenter chaque joueur, contenant leurs informations (nom, score...), leur plateau de jeu (Board) et leurs flottes (Ships).
 3. Ships
 - Responsabilité : Gérer les caractéristiques des navires (taille, points de vie, position...), ainsi que leur état (intact, touché, coulé).
-
+4. Game
+- Responsabilité : Gérer les objets et le jeu (initialisation de la partie, création des instances, gestion des conditions de victoire).
 
 1 - Création de la classe board:
 
@@ -75,6 +76,24 @@ Je m'attaque ensuite à la méthode de placement des bateaux,
 Je récupère les attributs de la ref de l'objet Ship
 Je vais utiliser la même technique que la vérification dans les boucles sans qu'on va set les char à la place de les comparer. 
 Pour une vérification, elle retourne false si elle ne peu pas placer le bateau et true apres le placement (je ne sais pas encore comment je vais l'utiliser).
+
+5 - Initialisation des bateaux :
+
+J'ai réfléchit pendant pas mal de temps pour savoir si je codais cette méthode dans la class Game, Board ou Player.
+J'ai décidé de la mettre dans la class player. C'est pour moi plus représentatif sachant que chaque bateau ira se mettre dans un array ou vector contenu dans l'instance du joueur.
+
+J'ai ajouté donc deux méthodes une qui initialise les bateaux dans l'instance du joueur et l'autre qui les places.
+Ca m'a pris quelques heures... J'ai mis quelque temps à trouver la technique de génération du random aléatoire pour le placement.
+
+![image](https://github.com/TimCauss/TP-bataille-Navale-POO-B3/assets/96956172/308c71d0-2ff7-41b9-bd0e-c09e6826ef15)
+
+Maintenant que nous avons nos ship je vai pouvoir commencer la boucle de gameplay.
+
+6 - Class Game:
+
+Pour gérer le jeu et les objets j'ai décidé de créer une class Game.
+Elle aura pour attributs les noms des joueurs, et un tableau des joueurs.
+
 
 
 
