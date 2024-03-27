@@ -5,6 +5,9 @@
 #include <iomanip>
 #include <string>
 #include <array>
+#include <vector>
+
+
 using namespace::std;
 
 // Variables constantes du jeu
@@ -19,14 +22,26 @@ const char MISSCHAR = '+';
 const char HITCHAR = 'X';
 
 
-//Games :
+
+//Games :                   // pense bete std::array<int, 3> a = {1, 2, 3};
 class Game {
 private:
-    array<Player, PLAYERSNBR> players; // pense bete std::array<int, 3> a = {1, 2, 3};
+    string playerName1;
+    string playerName2;
 
-    // Reprendre ICI demain
-    // On commence par harcoder les bateaux
-    // TODO: coder une méthode aléatoire
+
+    // A TERMINER
+    /*
+    Game() {
+        players[0] = Player(playerName1);
+        players[1] = Player(playerName2);
+    }
+    */
+
+    void run(){
+        //A faire, méthode pour une boucle de gameplay
+    }
+
 
 };
 
@@ -57,7 +72,16 @@ public:
         return orientation;
     }
 
+    //setter
+
+    void setPosition(int x, int y, char orientation) {
+        this->x = x;
+        this->y = y;
+        this->orientation = orientation;
+    }
+
     // Methdes
+
     bool isSunk() {
         return hits >= size;
     }
@@ -154,12 +178,12 @@ private:
     static int nextId;
     int id;
     Board board;
-    // vector de ships à faire apres
+    vector<Ship> fleet;
 
 public:
     Player(const string& n) : name(n), board(Board()){
         id = nextId++;
-        // Création de ship à faire plus tard
+        placeFleet();           // on place les ships du joueur
     }
 
     //getters :
@@ -179,12 +203,38 @@ public:
         return id;
     }
 
-    // Faire getteur de la flotte ici
+private:
+
+    //void initializeFleet()
+
+    void placeFleet() { // TODO: Faire une boucle de placement
+        for (Ship& ship : fleet) {
+            bool placed = false;
+            while (!placed) {
+                char orientation = 'H';
+                int x = rand() % BOARDSIZE;
+                int y = rand() % BOARDSIZE;
+
+                int randomNum = rand() % 2 ;
+                if (randomNum == 0) {
+                    char orientation = 'H';
+                }
+                else {
+                    char orientation = 'V';
+                }
+
+                // on update la pos du bateau :
+                ship.setPosition(x, y, orientation);
+                // On vérif le placement
+                placed = board.verifPlaceShip(x, y, ship.getSize(), orientation);
+                if (placed) {
+                    board.placeShip(ship);
+                }
+            }
+        }
+    }
 
 };
-
-
-// Créer une class Game pour gérer la partie
 
 
 //Initialisation du compteur d'ID :
@@ -193,16 +243,10 @@ int Player::nextId = 1;
 
 int main()
 {
-    Ship ship1(4, 0, 0, 'H');
-    Ship ship2(3, 2, 2, 'V');
-    Ship ship3(2, 4, 4, 'H');
-    Ship ship4(1, 6, 6, 'V');
-
+    srand(time(0)); // On génére la seed du random de la partie basé sur le temps (a optimiser pour une meilleur random)
 
     Player player1("Chrisophe");
     Player player2("Louis");
-
-
 
 
     cout << "Player 1 ID : " << player1.getID() << ", Name: " << player1.getName() << endl;
