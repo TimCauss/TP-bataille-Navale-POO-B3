@@ -16,10 +16,10 @@ const int SHIPNBR = 4;
 const int BOARDSIZE = 9;
 const int BOARDSETW = 2;
 
-const char SHIPSCHAR = 'S';
+const char SHIPSCHAR = 'X';
 const char SEACHAR = '0';
 const char MISSCHAR = '+';
-const char HITCHAR = 'X';
+const char HITCHAR = 'H';
 
 
 
@@ -41,7 +41,6 @@ private:
     void run(){
         //A faire, méthode pour une boucle de gameplay
     }
-
 
 };
 
@@ -168,8 +167,6 @@ public:
     }
 };
 
-
-
 // Class Player
 
 class Player {
@@ -183,7 +180,8 @@ private:
 public:
     Player(const string& n) : name(n), board(Board()){
         id = nextId++;
-        placeFleet();           // on place les ships du joueur
+        initializeFleet();      // On initialise d'abord !!!
+        placeFleet();           // on place ensuite les ships du joueur
     }
 
     //getters :
@@ -205,7 +203,12 @@ public:
 
 private:
 
-    //void initializeFleet()
+    // Append les ship à la flotte du joueur !! doc vector pour trouver un append => emplace_back
+    void initializeFleet() { // A mettre dans une boucle qui tourne SHIPNBR fois
+        fleet.emplace_back(4, 0, 0, 'H');
+        fleet.emplace_back(3, 0, 0, 'H');
+        fleet.emplace_back(2, 0, 0, 'H');
+    }
 
     void placeFleet() { // TODO: Faire une boucle de placement
         for (Ship& ship : fleet) {
@@ -215,12 +218,12 @@ private:
                 int x = rand() % BOARDSIZE;
                 int y = rand() % BOARDSIZE;
 
-                int randomNum = rand() % 2 ;
+                int randomNum = rand() % 2 ; // A debug !!!
                 if (randomNum == 0) {
-                    char orientation = 'H';
+                    orientation = 'H';
                 }
                 else {
-                    char orientation = 'V';
+                    orientation = 'V';
                 }
 
                 // on update la pos du bateau :
@@ -243,7 +246,7 @@ int Player::nextId = 1;
 
 int main()
 {
-    srand(time(0)); // On génére la seed du random de la partie basé sur le temps (a optimiser pour une meilleur random)
+    srand(time(0)); // On génére la seed du random
 
     Player player1("Chrisophe");
     Player player2("Louis");
@@ -251,6 +254,7 @@ int main()
 
     cout << "Player 1 ID : " << player1.getID() << ", Name: " << player1.getName() << endl;
     player1.printBoard();
+
     cout << endl << endl;
     cout << "Player 2 ID : " << player2.getID() << ", Name: " << player2.getName() << endl;
     player2.printBoard();
